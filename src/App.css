@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.navbar {
+  background-color:purple;
+  align-items: center;
+  font-size: 4em;
+}
