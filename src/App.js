@@ -17,15 +17,17 @@ class App extends React.Component {
     this.changeHandler = this.changeHandler.bind(this);
   }
 
-  changeHandler(id) {
-    console.log(id)
-    // this.setState(prevState => {
-    //   return {
-    //     // id: prevState.id,
-    //     // task: prevState.task,
-    //     completed: !prevState.completed
-    //   }
-    // })
+  changeHandler(itemid) {
+    console.log(itemid)
+    this.setState(prevState => {
+      const newState = prevState.toDoItems.map(item => {
+        if (item.id === itemid) {
+          item.completed = !item.completed
+        } 
+        return item;
+      })
+      return newState;
+    })
     // console.log(this.state)
   }
 
