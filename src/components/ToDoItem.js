@@ -1,8 +1,12 @@
 import React from "react";
 
 function ToDoItem(props) {
+  const itemStyle = {};
+  if (props.checked) {
+    itemStyle.textDecoration = "line-through";
+  }
   return (
-    <span>
+    <span style = {itemStyle}>
       <input
         type = "checkbox"
         checked = {props.checked}

@@ -18,7 +18,7 @@ class App extends React.Component {
   }
 
   changeHandler(itemid) {
-    console.log(itemid)
+    // console.log(itemid)
     this.setState(prevState => {
       const newState = prevState.toDoItems.map(item => {
         if (item.id === itemid) {
@@ -35,12 +35,12 @@ class App extends React.Component {
     const component = this.state.toDoItems.map(item => {
       return (
         <ToDoItem 
-        checked = { item.completed}
-        changeHandler = {this.changeHandler}
-        task = {item.task}
-        id = {item.id}
-        key = {item.id}
-      />
+          checked = { item.completed}
+          changeHandler = {this.changeHandler}
+          task = {item.task}
+          id = {item.id}
+          key = {item.id}
+        />
       )
     })
     // console.log(component);
