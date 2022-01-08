@@ -8,43 +8,59 @@ import React from 'react';
 // import contacts from './objects/contacts'
 // import JokeCard from './components/JokeCard';
 // import jokes from './objects/jokes'
-import toDoItems from './objects/toDoItems'
-import ToDoItem from './components/ToDoItem'
+// import toDoItems from './objects/toDoItems'
+// import ToDoItem from './components/ToDoItem'
+import TravelForm from './components/TravelForm'
+import Alert from '@mui/material/Alert';
+
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {toDoItems}
-    this.changeHandler = this.changeHandler.bind(this);
+    this.state = {
+      firstName: 'Rumit',
+      lastName: 'Garg',
+      age: 20,
+      gender: 'male',
+      location: 'Delhi',
+      vegetarian: false,
+      kosher: false,
+      lactoseFree: false,
+      submitted: false
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  changeHandler(itemid) {
-    // console.log(itemid)
-    this.setState(prevState => {
-      const newState = prevState.toDoItems.map(item => {
-        if (item.id === itemid) {
-          item.completed = !item.completed
-        } 
-        return item;
-      })
-      return newState;
-    })
-    // console.log(this.state)
+  handleChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    // console.log(name, value)
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleSubmit(event) {
+    // alert('Your favorite flavor is: ' + this.state.value);
+    // alert('A name was submitted: ' + this.state.firstName + this.state.lastName)
+    this.setState({ submitted: true });
+    event.preventDefault();
   }
 
   render() {
-    const component = this.state.toDoItems.map(item => {
-      return (
-        <ToDoItem 
-          checked = { item.completed}
-          changeHandler = {this.changeHandler}
-          task = {item.task}
-          id = {item.id}
-          key = {item.id}
+    const {firstName, lastName, age, gender, location} = this.state;
+    return (
+      <div>
+        <TravelForm
+          data = {this.state}
+          handleChange = {this.handleChange}
+          handleSubmit = {this.handleSubmit}
         />
-      )
-    })
-    // console.log(component);
-    return component;
+        { this.state.submitted && 
+        <p>Your name is {firstName} {lastName} and your age is {age}. Your sex is {gender}. You are travelling to {location}.</p>}
+      </div>
+    )
   }
 }
 
